@@ -4,10 +4,9 @@ metadata:
   name: my-ingress
 spec:
   rules:
-  - host: a39de6cf79e5241048431fb157b1d999-846645d9218208f2.elb.us-east-1.amazonaws.com
-    http:
+  - http:
       paths:
-      - path: /service1
+      - path: /
         pathType: Prefix
         backend:
           service:
