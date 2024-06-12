@@ -1,0 +1,59 @@
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+  namespace: naveen
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: nginx:stable-alpine3.19-perl
+        ports:
+        - containerPort: 80
+
+---
+
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+  namespace: naveen
+spec:
+  selector:
+    app: my-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+---
+
+# Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+  namespace: naveen
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: my-service
+            port:
+              number: 80
