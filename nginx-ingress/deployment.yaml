@@ -3,7 +3,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-app
-  namespace: naveen
 spec:
   replicas: 3
   selector:
@@ -27,7 +26,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: my-service
-  namespace: naveen
 spec:
   selector:
     app: my-app
@@ -43,9 +41,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: my-ingress
-  namespace: naveen
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+annotations:
+  nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - http:
