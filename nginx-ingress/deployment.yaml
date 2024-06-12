@@ -15,9 +15,9 @@ spec:
     spec:
       containers:
       - name: my-app-container
-        image: tomcat:latest
+        image: httpd:alpine3.20
         ports:
-        - containerPort: 8080
+        - containerPort: 80
 
 ---
 
@@ -32,7 +32,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8080
+      targetPort: 80
 
 ---
 
