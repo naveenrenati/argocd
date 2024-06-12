@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: service1
-        image: tomcat:latest
+        image: nginx:stable-alpine3.19-perl
         ports:
         - containerPort: 80
         env:
